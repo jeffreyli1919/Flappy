@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,11 +18,22 @@ import javax.swing.Timer;
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
 	//Duck d = new Duck();
 	Background b = new Background(0, 0);
+	Player p = new Player(200, 700);
+	//Laser laser = new Laser();
+	private ArrayList<Laser> lasers = new ArrayList<Laser>();
+	
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		//d.paint(g);
 		b.paint(g);
+		p.paint(g);
+		//laser.paint(g);
+		
+		for (Laser thisLaser : lasers) {
+			thisLaser.paint(g);
+			thisLaser.setSpeedY(thisLaser.getSpeedY());
+		}
 	}
 	
 	public static void main(String[] arg) {
@@ -46,9 +58,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
+	public void mouseClicked(MouseEvent m) {
 		// TODO Auto-generated method stub
+		Laser temp = new Laser(m.getX(), m.getY());
 		
+		
+		lasers.add(temp);
 	}
 
 	@Override
@@ -82,13 +97,23 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	}
 
 	@Override
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		System.out.println(arg0.getKeyCode());
+	public void keyPressed(KeyEvent m) {
+		System.out.println(m.getKeyCode());
+		// 37  = left
+		// 39 = right
+		//38 = up
+		//65 a 
+		//68 d
+		if (m.getKeyCode() == 65) {
+			p.setX(p.getX() - 10);
+		} else if (m.getKeyCode() == 68) {
+			p.setX(p.getX() + 10);
+		}
+		
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
+	public void keyReleased(KeyEvent m) {
 		// TODO Auto-generated method stub
 		
 	}

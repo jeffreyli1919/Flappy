@@ -7,21 +7,22 @@ import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 
-public class Player {
+public class Laser {
 	private int x, y;
 	private Image img; 	
 	private AffineTransform tx;
-	private double speedX;
-	private double speedY;
+	private double speedY = 5;
 	
 
-	public Player(int x, int y) {
-		img = getImage("gameJet.png"); //load the image for Tree
+	public Laser(int x, int y) {
+		img = getImage("newLaser.png"); //load the image for Tree
 		this.x = x;
 		this.y = y;
 		tx = AffineTransform.getTranslateInstance(x, y);
 		init(x, y); 				//initialize the location of the image
 									//use your variables
+		update();
+		speedY = 5;
 	}
 	
 	
@@ -32,15 +33,8 @@ public class Player {
 	}
 	
 	public void collide(int x, int y) {
-		if (x >= 730) {
-			speedX *= -1;
-		}
 		if (y >= 460) {
 			speedY *= -1;
-		}
-	
-		if (x <= 0) {
-			speedX *= -1;
 		}
 		if (y <= 0) {
 			speedY *= -1;
@@ -51,9 +45,8 @@ public class Player {
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(img, tx, null);
-		x += speedX;
-		y += speedY;
-		update();
+		y -= speedY;
+		
 
 	}
 	
@@ -73,6 +66,13 @@ public class Player {
 	public void setY(int y) {
 		this.y = y;
 	}
+	public double getSpeedY() {
+		return speedY;
+	}
+	
+	public void setSpeedY(double d) {
+		speedY = d;
+	}
 	
 	
 	private void update() {
@@ -88,7 +88,7 @@ public class Player {
 	private Image getImage(String path) {
 		Image tempImage = null;
 		try {
-			URL imageURL = Player.class.getResource(path);
+			URL imageURL = Laser.class.getResource(path);
 			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
 		} catch (Exception e) {
 			e.printStackTrace();
