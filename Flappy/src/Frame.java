@@ -21,7 +21,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	Player p = new Player(200, 700);
 	//Laser laser = new Laser();
 	private ArrayList<Laser> lasers = new ArrayList<Laser>();
-	
+	BlueInvader blue = new BlueInvader(0, 0);
+	GreenInvader green = new GreenInvader(100, 0);
+	YellowInvader yellow = new YellowInvader(200, 0);
+	YellowInvader[] yellows = new YellowInvader[10];
+	GreenInvader[][] greens = new GreenInvader[2][10];
+	BlueInvader[][] blues = new BlueInvader[2][10];
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
@@ -29,11 +34,23 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		b.paint(g);
 		p.paint(g);
 		//laser.paint(g);
+		blue.paint(g);
+		green.paint(g);
+		yellow.paint(g);
 		
 		for (Laser thisLaser : lasers) {
 			thisLaser.paint(g);
 			thisLaser.setSpeedY(thisLaser.getSpeedY());
 		}
+		
+		for (int i = 0; i < yellows.length; i++) {
+			yellows[i] = new YellowInvader(i*80, 100);
+			yellows[i].paint(g);
+		}
+		
+		
+		
+		
 	}
 	
 	public static void main(String[] arg) {
@@ -42,7 +59,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	public Frame() {
 		JFrame f = new JFrame("Duck Hunt");
-		f.setSize(new Dimension(600, 900));
+		f.setSize(new Dimension(1000, 800));
 		f.setBackground(Color.black);
 		f.add(this);
 		f.setResizable(false);
