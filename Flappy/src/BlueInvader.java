@@ -13,13 +13,15 @@ public class BlueInvader {
 	private AffineTransform tx;
 	private double speedX;
 	private double speedY;
+	private boolean alive;
 	
 
-	public BlueInvader(int x, int y, double speedX) {
-		img = getImage("blueInvader.png"); //load the image for Tree
+	public BlueInvader(int x, int y, double speedX, boolean alive) {
+		img = getImage("/imgs/blueInvader2.png"); //load the image for Tree
 		this.x = x;
 		this.y = y;
 		this.speedX = speedX;
+		this.alive = alive;
 		speedX = 3;
 		tx = AffineTransform.getTranslateInstance(x, y);
 		init(x, y); 				//initialize the location of the image

@@ -32,13 +32,16 @@ public class Laser {
 		init(x, y);
 	}
 	
-	public void collide(int x, int y) {
-		if (y >= 460) {
-			speedY *= -1;
-		}
-		if (y <= 0) {
-			speedY *= -1;
-		}
+	public boolean collide(BlueInvader other) {
+		int xLaser = this.x;
+		int yLaser = this.y;
+		int xBlue = other.getX();
+		int yBlue = other.getY();
+		int distance = (int) (Math.sqrt(Math.pow(xLaser-xBlue, 2) + Math.pow(yLaser-yBlue, 2)));
+	    if (distance < 25) {
+	    	return true;
+	    }
+	    return false;
 	}
 	
 	public void paint(Graphics g) {

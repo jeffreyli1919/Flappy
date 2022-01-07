@@ -54,7 +54,14 @@ public class Player {
 		x += speedX;
 		y += speedY;
 		update();
-
+		
+		//boundaries for player movement
+		if (x <= -75) {
+			x = -75;
+		} else if (x >= 880)
+		{
+			x = 880;
+		}
 	}
 	
 	//getters

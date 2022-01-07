@@ -21,7 +21,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	Player p = new Player(200, 700);
 	//Laser laser = new Laser();
 	private ArrayList<Laser> lasers = new ArrayList<Laser>();
-	BlueInvader blue = new BlueInvader(0, 0, 4);
+	BlueInvader blue = new BlueInvader(0, 0, 5, true);
 	GreenInvader green = new GreenInvader(100, 0, 3);
 	YellowInvader yellow = new YellowInvader(200, 0, 2);
 	YellowInvader[] yellows = new YellowInvader[10];
@@ -38,13 +38,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			for (int j = 0; j < greens[0].length; j++) {
 				if (i == 0) {
 					greens[i][j] = new GreenInvader(j * 80, 150, 2);
-					blues[i][j] = new BlueInvader(j * 80, 250, 2);
+					blues[i][j] = new BlueInvader(j * 80, 250, 2, true);
 					
 				}
 				
 				if (i == 1) {
 					greens[i][j] = new GreenInvader(j * 80, 200, 2);
-					blues[i][j] = new BlueInvader(j * 80, 300, 2);
+					blues[i][j] = new BlueInvader(j * 80, 300, 2, true);
 				}
 			}
 		}
@@ -109,6 +109,19 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				
 				
 				
+			}
+		}
+		
+		//collisions between lasers and Blue enemies
+		for (int i = 0; i < lasers.size(); i++) {
+			for (int j = 0; j < 2; j++) {
+				for (int k = 0; k < 10; k++) {
+					if (lasers.size() > 0 && lasers.get(i).collide(blues[j][k])) {
+						lasers.remove(i);
+				    	//blues[j][k].setX(-10000);
+				    	//blues[j][k].setY(-10000);
+					}
+				}
 			}
 		}
 		
