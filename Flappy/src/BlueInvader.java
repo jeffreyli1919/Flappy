@@ -15,10 +15,12 @@ public class BlueInvader {
 	private double speedY;
 	
 
-	public BlueInvader(int x, int y) {
+	public BlueInvader(int x, int y, double speedX) {
 		img = getImage("blueInvader.png"); //load the image for Tree
 		this.x = x;
 		this.y = y;
+		this.speedX = speedX;
+		speedX = 3;
 		tx = AffineTransform.getTranslateInstance(x, y);
 		init(x, y); 				//initialize the location of the image
 									//use your variables
@@ -52,7 +54,6 @@ public class BlueInvader {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(img, tx, null);
 		x += speedX;
-		y += speedY;
 		update();
 
 	}
@@ -74,15 +75,18 @@ public class BlueInvader {
 		this.y = y;
 	}
 	
+	public void setSpeedX(int speedX) {
+		this.speedX = speedX;
+	}
 	
 	private void update() {
 		tx.setToTranslation(x, y);
-		tx.scale(.1, .09);
+		tx.scale(.07, .06);
 	}
 	
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
-		tx.scale(1, 1);
+		tx.scale(.07, .06);
 	}
 
 	private Image getImage(String path) {

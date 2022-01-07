@@ -21,32 +21,103 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	Player p = new Player(200, 700);
 	//Laser laser = new Laser();
 	private ArrayList<Laser> lasers = new ArrayList<Laser>();
-	BlueInvader blue = new BlueInvader(0, 0);
-	GreenInvader green = new GreenInvader(100, 0);
-	YellowInvader yellow = new YellowInvader(200, 0);
+	BlueInvader blue = new BlueInvader(0, 0, 4);
+	GreenInvader green = new GreenInvader(100, 0, 3);
+	YellowInvader yellow = new YellowInvader(200, 0, 2);
 	YellowInvader[] yellows = new YellowInvader[10];
 	GreenInvader[][] greens = new GreenInvader[2][10];
 	BlueInvader[][] blues = new BlueInvader[2][10];
 	
+	{
+		for (int i = 0; i < yellows.length; i++) {
+			yellows[i] = new YellowInvader(i*80, 100, 2);
+			
+		}
+		
+		for (int i = 0; i < greens.length; i++) {
+			for (int j = 0; j < greens[0].length; j++) {
+				if (i == 0) {
+					greens[i][j] = new GreenInvader(j * 80, 150, 2);
+					blues[i][j] = new BlueInvader(j * 80, 250, 2);
+					
+				}
+				
+				if (i == 1) {
+					greens[i][j] = new GreenInvader(j * 80, 200, 2);
+					blues[i][j] = new BlueInvader(j * 80, 300, 2);
+				}
+			}
+		}
+	}
+	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-		//d.paint(g);
 		b.paint(g);
 		p.paint(g);
-		//laser.paint(g);
+		
 		blue.paint(g);
 		green.paint(g);
 		yellow.paint(g);
 		
+		
+		//painting lasers
 		for (Laser thisLaser : lasers) {
 			thisLaser.paint(g);
-			thisLaser.setSpeedY(thisLaser.getSpeedY());
 		}
 		
+		//movement and boundaries for yellows
 		for (int i = 0; i < yellows.length; i++) {
-			yellows[i] = new YellowInvader(i*80, 100);
 			yellows[i].paint(g);
+			
+			if (yellows[i].getX() >= 950) {
+				yellows[i].setSpeedX(-2);
+				yellows[i].setY(yellows[i].getY() + 15);
+			}
+			
+			if (yellows[i].getX() <= 0) {
+				yellows[i].setSpeedX(2);
+				yellows[i].setY(yellows[i].getY() + 15);
+			}
+			
 		}
+		
+		//movement and boundaries for greens and blues
+		for (int i = 0; i < greens.length; i++) {
+			for (int j = 0; j < greens[0].length; j++) {
+				greens[i][j].paint(g);
+				blues[i][j].paint(g);
+				
+				if (greens[i][j].getX() >= 950) {
+					greens[i][j].setSpeedX(-2);
+					greens[i][j].setY(greens[i][j].getY() + 15);
+				}
+				
+				if (blues[i][j].getX() >= 950) {
+					blues[i][j].setSpeedX(-2);
+					blues[i][j].setY(blues[i][j].getY() + 15);
+				}
+				
+				if (greens[i][j].getX() <= 0) {
+					greens[i][j].setSpeedX(2);
+					greens[i][j].setY(greens[i][j].getY() + 15);
+				}
+				
+				if (blues[i][j].getX() <= 0) {
+					blues[i][j].setSpeedX(2);
+					blues[i][j].setY(blues[i][j].getY() + 15);
+				}
+				
+				
+				
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		
@@ -66,7 +137,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		f.setLayout(new GridLayout(1,2));
 		f.addMouseListener(this);
 		f.addKeyListener(this);
-		Timer t = new Timer(16, this);
+		Timer t = new Timer(7, this);
 		t.start();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
@@ -77,10 +148,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	@Override
 	public void mouseClicked(MouseEvent m) {
 		// TODO Auto-generated method stub
-		Laser temp = new Laser(m.getX(), m.getY());
 		
-		
-		lasers.add(temp);
 	}
 
 	@Override
@@ -125,6 +193,11 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			p.setX(p.getX() - 10);
 		} else if (m.getKeyCode() == 68) {
 			p.setX(p.getX() + 10);
+		}
+		
+		if (m.getKeyCode() == 87) {
+			Laser temp = new Laser(p.getX() + 97, p.getY() + 2);
+			lasers.add(temp);
 		}
 		
 	}
