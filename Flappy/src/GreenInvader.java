@@ -13,13 +13,15 @@ public class GreenInvader {
 	private AffineTransform tx;
 	private double speedX;
 	private double speedY;
+	private boolean alive;
 	
 
-	public GreenInvader(int x, int y, double speedX) {
-		img = getImage("greenInvader.png"); //load the image for Tree
+	public GreenInvader(int x, int y, double speedX, boolean alive) {
+		img = getImage("/imgs/greenInvader.png"); //load the image for Tree
 		this.x = x;
 		this.y = y;
 		this.speedX = speedX;
+		this.alive = alive;
 		speedX = 3;
 		tx = AffineTransform.getTranslateInstance(x, y);
 		init(x, y); 				//initialize the location of the image
@@ -58,7 +60,7 @@ public class GreenInvader {
 
 	}
 	
-	//getters
+	//getters and setters for x,y location, speed, alive
 	public int getX() {
 		return x;
 	}
@@ -67,7 +69,6 @@ public class GreenInvader {
 		return y;
 	}
 	
-	//setters for location
 	public void setX(int x) {
 		this.x = x;
 	}
@@ -75,14 +76,26 @@ public class GreenInvader {
 		this.y = y;
 	}
 	
-	public void setSpeedX(int speedX) {
+	public double getSpeedX() {
+		return speedX;
+	}
+	
+	public void setSpeedX(double speedX) {
 		this.speedX = speedX;
+	}
+	
+	public boolean getAlive() {
+		return alive;
+	}
+	
+	public void setAlive(boolean alive) {
+		this.alive = alive;
 	}
 	
 	
 	private void update() {
 		tx.setToTranslation(x, y);
-		tx.scale(.09, .1);
+		tx.scale(.07, .08);
 	}
 	
 	private void init(double a, double b) {

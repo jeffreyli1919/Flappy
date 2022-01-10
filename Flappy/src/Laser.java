@@ -11,11 +11,11 @@ public class Laser {
 	private int x, y;
 	private Image img; 	
 	private AffineTransform tx;
-	private double speedY = 5;
+	private int speedY;
 	
 
 	public Laser(int x, int y) {
-		img = getImage("newLaser.png"); //load the image for Tree
+		img = getImage("/imgs/greenLaser.png"); //load the image for Tree
 		this.x = x;
 		this.y = y;
 		tx = AffineTransform.getTranslateInstance(x, y);
@@ -32,25 +32,64 @@ public class Laser {
 		init(x, y);
 	}
 	
+	
+	//method for checking shot collision with blue enemies
 	public boolean collide(BlueInvader other) {
 		int xLaser = this.x;
 		int yLaser = this.y;
-		int xBlue = other.getX();
-		int yBlue = other.getY();
+		
+		//center of enemies
+		int xBlue = (other.getX()*2+40) / 2;
+		int yBlue = (other.getY()*2+25) / 2;
+		
 		int distance = (int) (Math.sqrt(Math.pow(xLaser-xBlue, 2) + Math.pow(yLaser-yBlue, 2)));
-	    if (distance < 25) {
+	    if (distance < 22) {
 	    	return true;
 	    }
 	    return false;
 	}
 	
+	//method for checking shot collision with green enemies
+		public boolean collide(GreenInvader other) {
+			int xLaser = this.x;
+			int yLaser = this.y;
+			
+			//center of enemies
+			int xGreen = (other.getX()*2+40) / 2;
+			int yGreen = (other.getY()*2+25) / 2;
+			
+			
+			int distance = (int) (Math.sqrt(Math.pow(xLaser-xGreen, 2) + Math.pow(yLaser-yGreen, 2)));
+		    if (distance < 22) {
+		    	return true;
+		    }
+		    return false;
+		}
+		
+		//method for checking shot collision with yellow enemies
+		public boolean collide(YellowInvader other) {
+			int xLaser = this.x;
+			int yLaser = this.y;
+			
+			//center of enemies
+			int xYellow = (other.getX()*2+40) / 2;
+			int yYellow = (other.getY()*2+25) / 2;
+			
+			
+			int distance = (int) (Math.sqrt(Math.pow(xLaser-xYellow, 2) + Math.pow(yLaser-yYellow, 2)));
+		    if (distance < 22) {
+		    	return true;
+		    }
+		    return false;
+		}
+	
 	public void paint(Graphics g) {
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(img, tx, null);
-		y = y - 5;
+		y = (int) (y - speedY);
 		init(x, y);
-		update();
+		update(); 
 		
 
 	}
@@ -75,7 +114,7 @@ public class Laser {
 		return speedY;
 	}
 	
-	public void setSpeedY(double d) {
+	public void setSpeedY(int d) {
 		speedY = d;
 	}
 	

@@ -13,7 +13,7 @@ public class Background{
 	private AffineTransform tx;
 
 	public Background(int x, int y) {
-		img = getImage("space.jpg"); //load the image for Tree
+		img = getImage("/imgs/space.jpg"); //load the image for Tree
 		this.x = x;
 		this.y = y;
 
