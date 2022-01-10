@@ -16,7 +16,7 @@ public class Player {
 	
 
 	public Player(int x, int y) {
-		img = getImage("gameJet.png"); //load the image for Tree
+		img = getImage("/imgs/gameJet.png"); //load the image for Tree
 		this.x = x;
 		this.y = y;
 		tx = AffineTransform.getTranslateInstance(x, y);

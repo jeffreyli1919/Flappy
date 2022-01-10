@@ -13,12 +13,14 @@ public class YellowInvader {
 	private AffineTransform tx;
 	private double speedX;
 	private double speedY;
+	private boolean alive;
 	
 
-	public YellowInvader(int x, int y, double speedX) {
-		img = getImage("yellowInvader.png"); //load the image for Tree
+	public YellowInvader(int x, int y, double speedX, boolean alive) {
+		img = getImage("/imgs/yellowInvader.png"); //load the image for Tree
 		this.x = x;
 		this.y = y;
+		this.alive = alive;
 		this.speedX = speedX;
 		tx = AffineTransform.getTranslateInstance(x, y);
 		init(x, y); 				//initialize the location of the image
@@ -56,7 +58,7 @@ public class YellowInvader {
 
 	}
 	
-	//getters
+	//getters and setters for x,y location, speed, alive
 	public int getX() {
 		return x;
 	}
@@ -65,7 +67,6 @@ public class YellowInvader {
 		return y;
 	}
 	
-	//setters for location
 	public void setX(int x) {
 		this.x = x;
 	}
@@ -73,20 +74,32 @@ public class YellowInvader {
 		this.y = y;
 	}
 	
-	public void setSpeedX(int speedX) {
+	public double setSpeedX() {
+		return speedX;
+	}
+	
+	public void setSpeedX(double speedX) {
 		this.speedX = speedX;
+	}
+	
+	public boolean getAlive() {
+		return alive;
+	}
+	
+	public void setAlive(boolean alive) {
+		this.alive = alive;
 	}
 	
 	
 	private void update() {
 		tx.setToTranslation(x, y);
-		tx.scale(.17, .15);
+		tx.scale(.14, .13);
 		x += speedX;
 	}
 	
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
-		tx.scale(.17, .15);
+		tx.scale(.14, .13);
 	}
 
 	private Image getImage(String path) {

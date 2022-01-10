@@ -60,7 +60,7 @@ public class BlueInvader {
 
 	}
 	
-	//getters
+	//getters and setters for x,y location, speed, alive
 	public int getX() {
 		return x;
 	}
@@ -69,7 +69,6 @@ public class BlueInvader {
 		return y;
 	}
 	
-	//setters for location
 	public void setX(int x) {
 		this.x = x;
 	}
@@ -77,13 +76,28 @@ public class BlueInvader {
 		this.y = y;
 	}
 	
-	public void setSpeedX(int speedX) {
+	public double getSpeedX() {
+		return speedX;
+	}
+	
+	public void setSpeedX(double speedX) {
 		this.speedX = speedX;
 	}
 	
+	public boolean getAlive() {
+		return alive;
+	}
+	
+	public void setAlive(boolean alive) {
+		this.alive = alive;
+	}
+	
+	
+	
+	
 	private void update() {
 		tx.setToTranslation(x, y);
-		tx.scale(.07, .06);
+		tx.scale(.055, .05);
 	}
 	
 	private void init(double a, double b) {
