@@ -94,7 +94,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 						badLasers.add(temp);
 					}
 				}
-			}
+			}  
 		}
 		
 		//painting player and enemy lasers
