@@ -31,20 +31,15 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	private ArrayList<EnemyLaser> badLasers = new ArrayList<EnemyLaser>();
 	
 	{
+		//array for yellow enemies
 		for (int i = 0; i < yellows.length; i++) {
 			
 			yellows[i] = new YellowInvader((i*80)+2, 100, 2, true);
 
 			
 		}
-		/*
-		for (int i = 0; i < 10; i++) {
-			YellowInvader temp = new YellowInvader(i*80, 100, 2, true);
-			yellowInvaders.add(temp);
-			
-		}
-		*/
 		
+		//arrays for green and blue enemies
 		for (int i = 0; i < greens.length; i++) {
 			for (int j = 0; j < greens[0].length; j++) {
 				if (i == 0) {
@@ -161,70 +156,39 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		}
 		
 		//checking boundaries to decide when all enemies turn
-		for (int k = 0; k < 2; k++) {
-			if (blues[k][leftMin].getX() >= 950 || greens[k][leftMin].getX() >= 950) {
-				for (int i = 0; i < blues.length; i++) {
-					for (int j = 0; j < blues[0].length; j++) {
-						blues[i][j].setSpeedX(-3);
-						blues[i][j].setY(blues[i][j].getY() + 15);
-						greens[i][j].setSpeedX(-3);
-						greens[i][j].setY(greens[i][j].getY() + 15);
-						if (i == 1 ) { 
-							yellows[j].setSpeedX(-3);
-							yellows[j].setY(yellows[j].getY() + 15);
+				for (int k = 0; k < 2; k++) {
+					if (blues[k][leftMin].getX() >= 950 || greens[k][leftMin].getX() >= 950) {
+						for (int i = 0; i < blues.length; i++) {
+							for (int j = 0; j < blues[0].length; j++) {
+								blues[i][j].setSpeedX(-2);
+								blues[i][j].setY(blues[i][j].getY() + 15);
+								greens[i][j].setSpeedX(-2);
+								greens[i][j].setY(greens[i][j].getY() + 15);
+								if (i == 1 ) { 
+									yellows[j].setSpeedX(-2);
+									yellows[j].setY(yellows[j].getY() + 15);
+								}
+							}
 						}
 					}
-				}
-
-			}
-
-			
-			if (blues[k][rightMax].getX() <= 0 || greens[k][rightMax].getX() <= 0) {
-				for (int i = 0; i < blues.length; i++) {
-					for (int j = 0; j < blues[0].length; j++) {
-						blues[i][j].setSpeedX(3);
-						blues[i][j].setY(blues[i][j].getY() + 15);
-						greens[i][j].setSpeedX(3);
-						greens[i][j].setY(greens[i][j].getY() + 15);
-						if (i == 1) { 
-							yellows[j].setSpeedX(3);
-							yellows[j].setY(yellows[j].getY() + 15);
+					
+					if (blues[k][rightMax].getX() <= 0 || greens[k][rightMax].getX() <= 0) {
+						for (int i = 0; i < blues.length; i++) {
+							for (int j = 0; j < blues[0].length; j++) {
+								blues[i][j].setSpeedX(2);
+								blues[i][j].setY(blues[i][j].getY() + 15);
+								greens[i][j].setSpeedX(2);
+								greens[i][j].setY(greens[i][j].getY() + 15);
+								if (i == 1) { 
+									yellows[j].setSpeedX(2);
+									yellows[j].setY(yellows[j].getY() + 15);
+								}
+							}
 						}
 					}
+
+					
 				}
-			}
-
-			
-
-		}
-
-//		//painting greens and blues
-//		for (int i = 0; i < greens.length; i++) {
-//			for (int j = 0; j < greens[0].length; j++) {
-//				
-//				//painting blue enemies if they're alive
-//				if (blues[i][j].getAlive()) {
-//					blues[i][j].paint(g);
-//					if (j > rightMax) {
-//						rightMax = j;
-//					}
-//					if (j < leftMin) {
-//						leftMin = j;
-//					}
-//				}
-//				
-//				//painting green enemies if they're alive
-//				if (greens[i][j].getAlive()) {
-//					greens[i][j].paint(g);
-//					if (j > rightMax) {
-//						rightMax = j;
-//					}
-//					if (j < leftMin) {
-//						leftMin = j;
-//					}
-//				}
-//			}
-//		}
 
 //		boolean allLeftScreen = true;
 //		//checking if all alive enemies are off screen on the left
@@ -247,74 +211,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 //			}
 //		}
 		
-		
-
-		
-		
-
-		
-		//checking boundaries to decide when all enemies turn
-		for (int k = 0; k < 2; k++) {
-			if (blues[k][leftMin].getX() >= 950 || greens[k][leftMin].getX() >= 950) {
-				for (int i = 0; i < blues.length; i++) {
-					for (int j = 0; j < blues[0].length; j++) {
-						blues[i][j].setSpeedX(-2);
-						blues[i][j].setY(blues[i][j].getY() + 15);
-						greens[i][j].setSpeedX(-2);
-						greens[i][j].setY(greens[i][j].getY() + 15);
-						if (i == 1 ) { 
-							yellows[j].setSpeedX(-2);
-							yellows[j].setY(yellows[j].getY() + 15);
-						}
-					}
-				}
-			}
-			
-			if (blues[k][rightMax].getX() <= 0 || greens[k][rightMax].getX() <= 0) {
-				for (int i = 0; i < blues.length; i++) {
-					for (int j = 0; j < blues[0].length; j++) {
-						blues[i][j].setSpeedX(2);
-						blues[i][j].setY(blues[i][j].getY() + 15);
-						greens[i][j].setSpeedX(2);
-						greens[i][j].setY(greens[i][j].getY() + 15);
-						if (i == 1) { 
-							yellows[j].setSpeedX(2);
-							yellows[j].setY(yellows[j].getY() + 15);
-						}
-					}
-				}
-			}
-
-			
-		}
-		
-//		boolean allLeftScreen = true;
-//		//checking if all alive enemies are off screen on the left
-//		for (int i = 0; i < 2; i++) {
-//			for (int j = 0; j < 10; j++) {
-//				if (blues[i][j].getX() >= 0 && blues[i][j].getX() <= 950 && greens[i][j].getX() >= 0 && greens[i][j].getX() <= 950 && yellows[j].getX() >= 0 && yellows[j].getX() <= 950) {
-//					allLeftScreen = false;
-//				}
-//			}
-//		}
-//		if (allLeftScreen) {
-//			for (int i = 0; i < blues.length; i++) {
-//				for (int j = 0; j < blues[0].length; j++) {
-//					blues[i][j].setSpeedX(3);
-//					greens[i][j].setSpeedX(3);
-//					if (i == 1) { 
-//						yellows[j].setSpeedX(3);
-//					}
-//				}
-//			}
-//		}
-		
-		
-
-		
-		
-		
-		//collisions between lasers and all enemies enemies
+		//collisions between lasers and all enemies 
 		for (int i = 0; i < lasers.size(); i++) {
 			for (int j = 0; j < 2; j++) {
 				for (int k = 0; k < 10; k++) {
@@ -332,16 +229,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				}
 			}
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 	}
 	
