@@ -69,8 +69,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		green.paint(g);
 		yellow.paint(g);
 		
-		
-		
 		//blue and green enemy shooting
 		for (int i = 0; i < blues.length; i++) {
 			for (int j = 0; j < blues[0].length; j++) {
