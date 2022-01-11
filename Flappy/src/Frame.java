@@ -86,7 +86,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 						EnemyLaser temp = new EnemyLaser(greens[i][j].getX() + 15, greens[i][j].getY() + 10);
 						badLasers.add(temp);
 					}
-				}
+				} 
 				if (i == 1 && yellows[j].getAlive()) {
 					int random = (int) (Math.random()*350);
 					if (random == 2) {
