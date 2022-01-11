@@ -15,6 +15,7 @@ public class Laser {
 	
 
 	public Laser(int x, int y) {
+
 		img = getImage("/imgs/greenLaser.png"); //load the image for Tree
 		this.x = x;
 		this.y = y;
@@ -87,7 +88,9 @@ public class Laser {
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(img, tx, null);
+
 		y = (int) (y - speedY);
+
 		init(x, y);
 		update(); 
 		

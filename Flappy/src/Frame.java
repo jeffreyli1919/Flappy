@@ -32,7 +32,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	{
 		for (int i = 0; i < yellows.length; i++) {
+			
 			yellows[i] = new YellowInvader((i*80)+2, 100, 2, true);
+
 			
 		}
 		/*
@@ -46,14 +48,18 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		for (int i = 0; i < greens.length; i++) {
 			for (int j = 0; j < greens[0].length; j++) {
 				if (i == 0) {
+
 					greens[i][j] = new GreenInvader(j * 80, 150, 2, true);
 					blues[i][j] = new BlueInvader(j * 80, 250, 2, true);
+
 					
 				}
 				
 				if (i == 1) {
+
 					greens[i][j] = new GreenInvader(j * 80, 200, 2, true);
 					blues[i][j] = new BlueInvader(j * 80, 300, 2, true);
+
 				}
 			}
 		}
@@ -97,6 +103,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			}  
 		}
 		
+
 		//painting player and enemy lasers
 				for (Laser thisLaser : lasers) {
 					thisLaser.paint(g);
@@ -105,9 +112,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				for (EnemyLaser thisLaser : badLasers) {
 					thisLaser.paint(g);
 				}
-		
-		
-		
 		
 		
 		//rightMax is leftmost enemy still alive on screen
@@ -155,6 +159,99 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				}
 			}
 		}
+		
+		//checking boundaries to decide when all enemies turn
+		for (int k = 0; k < 2; k++) {
+			if (blues[k][leftMin].getX() >= 950 || greens[k][leftMin].getX() >= 950) {
+				for (int i = 0; i < blues.length; i++) {
+					for (int j = 0; j < blues[0].length; j++) {
+						blues[i][j].setSpeedX(-3);
+						blues[i][j].setY(blues[i][j].getY() + 15);
+						greens[i][j].setSpeedX(-3);
+						greens[i][j].setY(greens[i][j].getY() + 15);
+						if (i == 1 ) { 
+							yellows[j].setSpeedX(-3);
+							yellows[j].setY(yellows[j].getY() + 15);
+						}
+					}
+				}
+
+			}
+
+			
+			if (blues[k][rightMax].getX() <= 0 || greens[k][rightMax].getX() <= 0) {
+				for (int i = 0; i < blues.length; i++) {
+					for (int j = 0; j < blues[0].length; j++) {
+						blues[i][j].setSpeedX(3);
+						blues[i][j].setY(blues[i][j].getY() + 15);
+						greens[i][j].setSpeedX(3);
+						greens[i][j].setY(greens[i][j].getY() + 15);
+						if (i == 1) { 
+							yellows[j].setSpeedX(3);
+							yellows[j].setY(yellows[j].getY() + 15);
+						}
+					}
+				}
+			}
+
+			
+
+		}
+
+//		//painting greens and blues
+//		for (int i = 0; i < greens.length; i++) {
+//			for (int j = 0; j < greens[0].length; j++) {
+//				
+//				//painting blue enemies if they're alive
+//				if (blues[i][j].getAlive()) {
+//					blues[i][j].paint(g);
+//					if (j > rightMax) {
+//						rightMax = j;
+//					}
+//					if (j < leftMin) {
+//						leftMin = j;
+//					}
+//				}
+//				
+//				//painting green enemies if they're alive
+//				if (greens[i][j].getAlive()) {
+//					greens[i][j].paint(g);
+//					if (j > rightMax) {
+//						rightMax = j;
+//					}
+//					if (j < leftMin) {
+//						leftMin = j;
+//					}
+//				}
+//			}
+//		}
+
+//		boolean allLeftScreen = true;
+//		//checking if all alive enemies are off screen on the left
+//		for (int i = 0; i < 2; i++) {
+//			for (int j = 0; j < 10; j++) {
+//				if (blues[i][j].getX() >= 0 && blues[i][j].getX() <= 950 && greens[i][j].getX() >= 0 && greens[i][j].getX() <= 950 && yellows[j].getX() >= 0 && yellows[j].getX() <= 950) {
+//					allLeftScreen = false;
+//				}
+//			}
+//		}
+//		if (allLeftScreen) {
+//			for (int i = 0; i < blues.length; i++) {
+//				for (int j = 0; j < blues[0].length; j++) {
+//					blues[i][j].setSpeedX(3);
+//					greens[i][j].setSpeedX(3);
+//					if (i == 1) { 
+//						yellows[j].setSpeedX(3);
+//					}
+//				}
+//			}
+//		}
+		
+		
+
+		
+		
+
 		
 		//checking boundaries to decide when all enemies turn
 		for (int k = 0; k < 2; k++) {
@@ -217,7 +314,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		
 		
-		//collisions between lasers and Blue enemies
+		//collisions between lasers and all enemies enemies
 		for (int i = 0; i < lasers.size(); i++) {
 			for (int j = 0; j < 2; j++) {
 				for (int k = 0; k < 10; k++) {
@@ -274,9 +371,11 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		// TODO Auto-generated method stub
 		System.out.println("x: " + m.getX());
 		System.out.println("y: " + m.getY());
+
 		
 		EnemyLaser temp = new EnemyLaser(yellow.getX() + 15, yellow.getY() + 10);
 		badLasers.add(temp);
+
 	}
 
 	@Override
