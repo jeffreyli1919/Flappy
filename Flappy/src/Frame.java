@@ -34,7 +34,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		//array for yellow enemies
 		for (int i = 0; i < yellows.length; i++) {
 			
-			yellows[i] = new YellowInvader((i*80)+2, 100, 2, true);
+			yellows[i] = new YellowInvader((i*80)+2, 100, 3, true);
 
 			
 		}
@@ -44,16 +44,16 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			for (int j = 0; j < greens[0].length; j++) {
 				if (i == 0) {
 
-					greens[i][j] = new GreenInvader(j * 80, 150, 2, true);
-					blues[i][j] = new BlueInvader(j * 80, 250, 2, true);
+					greens[i][j] = new GreenInvader(j * 80, 150, 3, true);
+					blues[i][j] = new BlueInvader(j * 80, 250, 3, true);
 
 					
 				}
 				
 				if (i == 1) {
 
-					greens[i][j] = new GreenInvader(j * 80, 200, 2, true);
-					blues[i][j] = new BlueInvader(j * 80, 300, 2, true);
+					greens[i][j] = new GreenInvader(j * 80, 200, 3, true);
+					blues[i][j] = new BlueInvader(j * 80, 300, 3, true);
 
 				}
 			}
@@ -158,12 +158,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 					if (blues[k][leftMin].getX() >= 950 || greens[k][leftMin].getX() >= 950) {
 						for (int i = 0; i < blues.length; i++) {
 							for (int j = 0; j < blues[0].length; j++) {
-								blues[i][j].setSpeedX(-2);
+								blues[i][j].setSpeedX(-3);
 								blues[i][j].setY(blues[i][j].getY() + 15);
-								greens[i][j].setSpeedX(-2);
+								greens[i][j].setSpeedX(-3);
 								greens[i][j].setY(greens[i][j].getY() + 15);
 								if (i == 1 ) { 
-									yellows[j].setSpeedX(-2);
+									yellows[j].setSpeedX(-3);
 									yellows[j].setY(yellows[j].getY() + 15);
 								}
 							}
@@ -173,12 +173,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 					if (blues[k][rightMax].getX() <= 0 || greens[k][rightMax].getX() <= 0) {
 						for (int i = 0; i < blues.length; i++) {
 							for (int j = 0; j < blues[0].length; j++) {
-								blues[i][j].setSpeedX(2);
+								blues[i][j].setSpeedX(3);
 								blues[i][j].setY(blues[i][j].getY() + 15);
-								greens[i][j].setSpeedX(2);
+								greens[i][j].setSpeedX(3);
 								greens[i][j].setY(greens[i][j].getY() + 15);
 								if (i == 1) { 
-									yellows[j].setSpeedX(2);
+									yellows[j].setSpeedX(3);
 									yellows[j].setY(yellows[j].getY() + 15);
 								}
 							}
