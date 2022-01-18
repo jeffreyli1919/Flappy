@@ -23,7 +23,7 @@ public class Laser {
 		init(x, y); 				//initialize the location of the image
 									//use your variables
 		update();
-		speedY = 5;
+		speedY = 10;
 	}
 	
 	
