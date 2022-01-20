@@ -14,9 +14,10 @@ public class YellowInvader {
 	private double speedX;
 	private double speedY;
 	private boolean alive;
+	private boolean onScreen;
 	
 
-	public YellowInvader(int x, int y, double speedX, boolean alive) {
+	public YellowInvader(int x, int y, double speedX, boolean alive, boolean onScreen) {
 		img = getImage("/imgs/yellowInvader.png"); //load the image for Tree
 		this.x = x;
 		this.y = y;
@@ -88,6 +89,14 @@ public class YellowInvader {
 	
 	public void setAlive(boolean alive) {
 		this.alive = alive;
+	}
+	
+	public boolean getOnScreen() {
+		return onScreen;
+	}
+	
+	public void setOnScreen(boolean onScreen) {
+		this.onScreen = onScreen;
 	}
 	
 	

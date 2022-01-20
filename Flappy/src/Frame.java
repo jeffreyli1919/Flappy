@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -23,19 +24,20 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	private ArrayList<Laser> lasers = new ArrayList<Laser>();
 	BlueInvader blue = new BlueInvader(0, 0, 0, true);
 	GreenInvader green = new GreenInvader(100, 0, 0, true);
-	YellowInvader yellow = new YellowInvader(200, 0, 0, true);
+	YellowInvader yellow = new YellowInvader(200, 0, 0, true, true);
 	YellowInvader[] yellows = new YellowInvader[10];
 	private ArrayList<YellowInvader> yellowInvaders = new ArrayList<YellowInvader>();
 	GreenInvader[][] greens = new GreenInvader[2][10];
 	BlueInvader[][] blues = new BlueInvader[2][10];
 	private ArrayList<EnemyLaser> badLasers = new ArrayList<EnemyLaser>();
 	int laserCount = 0;
+	Player[] lives = new Player[3];
 	
 	{
 		//array for yellow enemies
 		for (int i = 0; i < yellows.length; i++) {
 			
-			yellows[i] = new YellowInvader((i*80)+2, 100, 3, true);
+			yellows[i] = new YellowInvader((i*80)+2, 100, 3, true, true);
 
 			
 		}
@@ -59,6 +61,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				}
 			}
 		}
+		//array for lives
+		for (int i = 0; i < lives.length; i++) {
+			lives[i] = new Player(i * 40, 700);
+		}
 	}
 	
 	public void paint(Graphics g) {
@@ -69,6 +75,14 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		blue.paint(g);
 		green.paint(g);
 		yellow.paint(g);
+		
+		for (int i = 0; i < lives.length; i++) {
+			lives[i].paint(g);
+		}
+		Font c = new Font("Helvetica", Font.BOLD, 20);
+		g.setFont(c);
+		g.setColor(Color.WHITE);
+		g.drawString("Lives:", 20, 750);
 		
 		//blue and green enemy shooting
 		for (int i = 0; i < blues.length; i++) {
@@ -97,6 +111,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			}  
 		}
 		
+		for (int i = 0; i < badLasers.size(); i++) {
+			if (badLasers.get(i).collide(p)) {
+				System.out.println("hi");
+			}
+		}
+		
 
 		//painting player and enemy lasers
 				for (Laser thisLaser : lasers) {
@@ -113,7 +133,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		int rightMax = 0;
 		int leftMin = 9;
 		
-		//painting yellows
+		//painting yellows if they're alive and setting onScreen
 		for (int i = 0; i < yellows.length; i++) {
 			if (yellows[i].getAlive()) {
 				yellows[i].paint(g);
@@ -122,6 +142,11 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				}
 				if (i < leftMin) {
 					leftMin = i;
+				}
+				if (yellows[i].getX() < -50 || yellows[i].getX() > 1000) {
+					yellows[i].setOnScreen(false);
+				} else {
+					yellows[i].setOnScreen(true);
 				}
 			}
 		}
@@ -189,56 +214,76 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 					
 				}
 
-		boolean allLeftScreen = true;
-		boolean allRightScreen = true;
-		//checking if all alive enemies are off screen on the left
-		//add on screen attribute for all enemies?
-		for (int i = 0; i < 2; i++) {
-			for (int j = 0; j < 10; j++) {	
-				if (blues[i][j].getAlive() && allLeftScreen) {
-					if (blues[i][j].getX() > -50) {
-						allLeftScreen = false;
-					}
-				}
-				if (greens[i][j].getAlive() && allLeftScreen) {
-					if (greens[i][j].getX() < -50) {
-						allLeftScreen = false;
-					}
-				}
-				if (yellows[j].getAlive() && allLeftScreen) {
-					allLeftScreen = false;
-				}
-				if (blues[i][j].getAlive() && allRightScreen) {
-					if (blues[i][j].getX() > 1000) {
-						allRightScreen = false;
-					}
-				}
-				if (greens[i][j].getAlive() && allRightScreen) {
-					if (greens[i][j].getX() > 1000) {
-						allRightScreen = false;
-					}
-				}
-				if (yellows[j].getAlive() && allRightScreen) {
-					if (yellows[j].getX() > 1000)
-					allRightScreen = false;
+//		boolean allLeftScreen = true;
+//		boolean allRightScreen = true;
+//		//checking if all alive enemies are off screen on the left
+//		//add on screen attribute for all enemies?
+//		for (int i = 0; i < 2; i++) {
+//			for (int j = 0; j < 10; j++) {	
+//				if (blues[i][j].getAlive() && allLeftScreen) {
+//					if (blues[i][j].getX() > -50) {
+//						allLeftScreen = false;
+//					}
+//				}
+//				if (greens[i][j].getAlive() && allLeftScreen) {
+//					if (greens[i][j].getX() < -50) {
+//						allLeftScreen = false;
+//					}
+//				}
+//				if (yellows[j].getAlive() && allLeftScreen) {
+//					allLeftScreen = false;
+//				}
+//				if (blues[i][j].getAlive() && allRightScreen) {
+//					if (blues[i][j].getX() > 1000) {
+//						allRightScreen = false;
+//					}
+//				}
+//				if (greens[i][j].getAlive() && allRightScreen) {
+//					if (greens[i][j].getX() > 1000) {
+//						allRightScreen = false;
+//					}
+//				}
+//				if (yellows[j].getAlive() && allRightScreen) {
+//					if (yellows[j].getX() > 1000)
+//					allRightScreen = false;
+//				}
+//			}
+//		}
+//		if (allLeftScreen) {
+//			System.out.println("left");
+//			for (int i = 0; i < blues.length; i++) {
+//				for (int j = 0; j < blues[0].length; j++) {
+//					blues[i][j].setSpeedX(3);
+//					greens[i][j].setSpeedX(3);
+//					if (i == 1) { 
+//						yellows[j].setSpeedX(3);
+//					}
+//				}
+//			}
+//		}
+		boolean offScreen = true;
+				
+		for (int i = 0 ; i < 2; i++) {
+			for (int j = 0; j < 10; j++) {
+				if (yellows[j].getOnScreen() == true) {
+					offScreen = false;
 				}
 			}
 		}
-		if (allLeftScreen) {
-			System.out.println("left");
-			for (int i = 0; i < blues.length; i++) {
-				for (int j = 0; j < blues[0].length; j++) {
-					blues[i][j].setSpeedX(3);
-					greens[i][j].setSpeedX(3);
-					if (i == 1) { 
-						yellows[j].setSpeedX(3);
-					}
+		if (offScreen) {
+			for (int i = 0; i < 10; i++) {
+				if (yellows[i].getX() < -10) {
+					yellows[i].setSpeedX(3);
+				} else if (yellows[i].getX() > 980) {
+					yellows[i].setSpeedX(-3);
 				}
 			}
 		}
 		
+				
+		
+		
 		//collisions between lasers and all enemies 
-	
 		for (int i = 0; i < lasers.size(); i++) {
 			if (lasers.get(i).getX() != 10000 && lasers.get(i).getY() >= 0) {
 				laserCount++;

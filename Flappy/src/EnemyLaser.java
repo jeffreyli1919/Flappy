@@ -43,6 +43,22 @@ public class EnemyLaser {
 
 	}
 	
+	//method for checking shot collision with player
+		public boolean collide(Player other) {
+			int xLaser = this.x;
+			int yLaser = this.y;
+			
+			//center of enemies
+			int xPlayer = (other.getX()*2+30) / 2;
+			int yPlayer = (other.getY()*2+35) / 2;
+			
+			int distance = (int) (Math.sqrt(Math.pow(xLaser-xPlayer, 2) + Math.pow(yLaser-yPlayer, 2)));
+		    if (distance < 40) {
+		    	return true;
+		    }
+		    return false;
+		}
+	
 	//getters
 	public int getX() {
 		return x;
