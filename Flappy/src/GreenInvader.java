@@ -12,7 +12,6 @@ public class GreenInvader {
 	private Image img; 	
 	private AffineTransform tx;
 	private double speedX;
-	private double speedY;
 	private boolean alive;
 	
 
@@ -22,7 +21,7 @@ public class GreenInvader {
 		this.y = y;
 		this.speedX = speedX;
 		this.alive = alive;
-		speedX = 3;
+		this.speedX = speedX;
 		tx = AffineTransform.getTranslateInstance(x, y);
 		init(x, y); 				//initialize the location of the image
 									//use your variables
@@ -33,22 +32,6 @@ public class GreenInvader {
 	public void changePicture(String newFileName) {
 		img = getImage(newFileName);
 		init(x, y);
-	}
-	
-	public void collide(int x, int y) {
-		if (x >= 730) {
-			speedX *= -1;
-		}
-		if (y >= 460) {
-			speedY *= -1;
-		}
-	
-		if (x <= 0) {
-			speedX *= -1;
-		}
-		if (y <= 0) {
-			speedY *= -1;
-		}
 	}
 	
 	public void paint(Graphics g) {

@@ -22,7 +22,7 @@ public class EnemyLaser {
 		init(x, y); 				//initialize the location of the image
 									//use your variables
 		update();
-		speedY = (int) (Math.random()*3)+2;
+		speedY = 8;
 	}
 	
 	
@@ -49,11 +49,11 @@ public class EnemyLaser {
 			int yLaser = this.y;
 			
 			//center of enemies
-			int xPlayer = (other.getX()*2+30) / 2;
-			int yPlayer = (other.getY()*2+35) / 2;
+			int xPlayer = (other.getX()+100);
+			int yPlayer = (other.getY()+10);
 			
 			int distance = (int) (Math.sqrt(Math.pow(xLaser-xPlayer, 2) + Math.pow(yLaser-yPlayer, 2)));
-		    if (distance < 40) {
+		    if (distance < 20) {
 		    	return true;
 		    }
 		    return false;

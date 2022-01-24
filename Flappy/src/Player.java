@@ -12,18 +12,18 @@ public class Player {
 	private Image img; 	
 	private AffineTransform tx;
 	private double speedX;
-	private double speedY;
+	private boolean alive;
 	
 
-	public Player(int x, int y) {
+	public Player(int x, int y, boolean alive) {
 		img = getImage("/imgs/gameJet.png"); //load the image for Tree
 		this.x = x;
 		this.y = y;
+		this.alive = alive;
 		tx = AffineTransform.getTranslateInstance(x, y);
 		init(x, y); 				//initialize the location of the image
 									//use your variables
 	}
-	
 	
 	
 	public void changePicture(String newFileName) {
@@ -31,28 +31,11 @@ public class Player {
 		init(x, y);
 	}
 	
-	public void collide(int x, int y) {
-		if (x >= 730) {
-			speedX *= -1;
-		}
-		if (y >= 460) {
-			speedY *= -1;
-		}
-	
-		if (x <= 0) {
-			speedX *= -1;
-		}
-		if (y <= 0) {
-			speedY *= -1;
-		}
-	}
-	
 	public void paint(Graphics g) {
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(img, tx, null);
 		x += speedX;
-		y += speedY;
 		update();
 		
 		//boundaries for player movement
@@ -79,6 +62,14 @@ public class Player {
 	}
 	public void setY(int y) {
 		this.y = y;
+	}
+	
+	public boolean getAlive() {
+		return alive;
+	}
+	
+	public void setAlive(boolean alive) {
+		this.alive = alive;
 	}
 	
 	
