@@ -58,7 +58,7 @@ public class YellowInvader {
 		this.y = y;
 	}
 	
-	public double setSpeedX() {
+	public double getSpeedX() {
 		return speedX;
 	}
 	

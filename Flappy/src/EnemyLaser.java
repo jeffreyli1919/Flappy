@@ -22,7 +22,7 @@ public class EnemyLaser {
 		init(x, y); 				//initialize the location of the image
 									//use your variables
 		update();
-		speedY = 8;
+		speedY = 10;
 	}
 	
 	

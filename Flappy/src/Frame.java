@@ -30,14 +30,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	
 	//game objects and variables
-	Player p = new Player(200, 600, true);
+	Player p = new Player(200, 600, true, 3);
 	private ArrayList<Laser> lasers = new ArrayList<Laser>();
-	YellowInvader[] yellows = new YellowInvader[10];
-	private ArrayList<YellowInvader> yellowInvaders = new ArrayList<YellowInvader>();
-	GreenInvader[][] greens = new GreenInvader[2][10];
-	BlueInvader[][] blues = new BlueInvader[2][10];
 	private ArrayList<EnemyLaser> badLasers = new ArrayList<EnemyLaser>();
 	int laserCount = 0;
+	YellowInvader[] yellows = new YellowInvader[10];
+	GreenInvader[][] greens = new GreenInvader[2][10];
+	BlueInvader[][] blues = new BlueInvader[2][10];
 	Player[] lives = new Player[3];
 	int score = 0;
 	boolean playing = true;
@@ -72,7 +71,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		}
 		//array for lives
 		for (int i = 0; i < lives.length; i++) {
-			lives[i] = new Player(i * 40, 700, true);
+			lives[i] = new Player(i * 40, 700, true, 0);
 		}
 	}
 	
@@ -441,14 +440,19 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		if (playing) {
 			if (m.getKeyCode() == 65) {
-				p.setX(p.getX() - 10);
+				if (p.getSpeedX() > 0) {
+					p.setSpeedX(p.getSpeedX()*-1);
+				}
+				
 			} else if (m.getKeyCode() == 68) {
-				p.setX(p.getX() + 10);
+				if (p.getSpeedX() < 0) {
+					p.setSpeedX(p.getSpeedX()*-1);
+				}
 			}
 			
 			if (m.getKeyCode() == 87) {
 				Laser temp = new Laser(p.getX() + 97, p.getY() + 2);
-				if (laserCount < 2) {
+				if (laserCount < 1) {
 					lasers.add(temp);
 				}
 				

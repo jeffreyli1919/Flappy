@@ -15,11 +15,12 @@ public class Player {
 	private boolean alive;
 	
 
-	public Player(int x, int y, boolean alive) {
+	public Player(int x, int y, boolean alive, double speedX) {
 		img = getImage("/imgs/gameJet.png"); //load the image for Tree
 		this.x = x;
 		this.y = y;
 		this.alive = alive;
+		this.speedX = speedX;
 		tx = AffineTransform.getTranslateInstance(x, y);
 		init(x, y); 				//initialize the location of the image
 									//use your variables
@@ -62,6 +63,14 @@ public class Player {
 	}
 	public void setY(int y) {
 		this.y = y;
+	}
+	
+	public double getSpeedX() {
+		return speedX;
+	}
+	
+	public void setSpeedX(double speedX) {
+		this.speedX = speedX;
 	}
 	
 	public boolean getAlive() {
