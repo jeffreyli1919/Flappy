@@ -13,7 +13,14 @@ Flappy can be run locally by cloning/forking this project. From there, run the f
 ## Game Controls
 The objective of Space Invaders is to eliminate all of the enemies. The player controls the spaceship. Use the keys A and D to move left and right respectively. Use the key W to shoot the enemies. However, the enemies also shoot, and the player has 3 lives. 
 
-## Game Code
+## Game Code Overview
+I created classes for each of the objects within the game: BlueInvaders, GreenInvaders, YellowInvaders, EnemyLasers, Lasers, Player, and Background. 
+
+Here's a detailed overview of the Laser Class, representing the lasers shot by the player: 
+
+
+
+
 
 ## Credits
 I created this project independently in class.
