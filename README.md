@@ -1,5 +1,7 @@
 # Flappy
 
+![](SpaceInvaders.gif)
+
 ## Project Overview
 
 AP CS Project: Create a game using Eclipse. 
