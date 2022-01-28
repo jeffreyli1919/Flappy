@@ -19,6 +19,13 @@ I created classes for each of the objects within the game: BlueInvaders, GreenIn
 Here's a detailed overview of the Laser Class, representing the lasers shot by the player: 
 
 
+![](gamecode1.PNG)
+Setting private variables and making Laser constructor
+![](gamecode2.PNG)
+Checks for collisions with Blue enemies. There's similar code for yellow and green enemies. 
+![](gamecode3.PNG)
+The paint function allows for laser movement. 
+
 
 
 
